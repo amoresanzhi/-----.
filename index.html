@@ -7,300 +7,435 @@
 <title>Форум предложений</title>
 
 <style>
+
 body { 
-  font-family: 'Inter', sans-serif; 
-  background: #f4f7f6; 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  padding: 20px; 
+font-family: 'Inter', sans-serif; 
+background: #f4f7f6; 
+display: flex; 
+flex-direction: column; 
+align-items: center; 
+padding: 20px; 
 }
 
 .container { 
-  width: 100%; 
-  max-width: 500px; 
-  background: white; 
-  padding: 25px; 
-  border-radius: 12px; 
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-  margin-bottom: 20px; 
+width: 100%; 
+max-width: 500px; 
+background: white; 
+padding: 25px; 
+border-radius: 12px; 
+box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+margin-bottom: 20px; 
 }
 
 .auth-bar { 
-  background: white; 
-  padding: 15px; 
-  border-radius: 12px; 
-  margin-bottom: 20px; 
-  display: flex; 
-  align-items: center; 
-  gap: 15px; 
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+background: white; 
+padding: 15px; 
+border-radius: 12px; 
+margin-bottom: 20px; 
+display: flex; 
+align-items: center; 
+gap: 15px; 
+box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
 }
 
 .user-avatar { 
-  width: 40px; 
-  height: 40px; 
-  border-radius: 50%; 
-  border: 2px solid #007bff; 
+width: 40px; 
+height: 40px; 
+border-radius: 50%; 
+border: 2px solid #007bff; 
 }
 
 input { 
-  width: 100%; 
-  padding: 12px; 
-  margin: 8px 0; 
-  border: 1px solid #ddd; 
-  border-radius: 6px; 
-  box-sizing: border-box; 
+width: 100%; 
+padding: 12px; 
+margin: 8px 0; 
+border: 1px solid #ddd; 
+border-radius: 6px; 
+box-sizing: border-box; 
 }
 
 button { 
-  background: #007bff; 
-  color: white; 
-  border: none; 
-  padding: 12px; 
-  border-radius: 6px; 
-  width: 100%; 
-  font-size: 16px; 
-  font-weight: 600; 
-  cursor: pointer; 
-  transition: 0.3s; 
-}
-
-button:hover { background: #0056b3; }
-
-button.disabled { 
-  background: #ccc; 
-  cursor: not-allowed; 
+background: #007bff; 
+color: white; 
+border: none; 
+padding: 12px; 
+border-radius: 6px; 
+width: 100%; 
+font-size: 16px; 
+font-weight: 600; 
+cursor: pointer; 
 }
 
 .logo-btn { 
-  background: #f7f7f7; 
-  padding: 8px 15px; 
-  width: auto; 
-  font-size: 14px; 
-  color: black;
+background: #f7f7f7; 
+padding: 8px 15px; 
+width: auto; 
+font-size: 14px; 
+color: black;
 }
 
 .post { 
-  background: #fff; 
-  border: 1px solid #eaeaea; 
-  padding: 15px; 
-  margin-top: 15px; 
-  border-radius: 8px; 
-  width: 100%; 
-  max-width: 500px; 
+background: #fff; 
+border: 1px solid #eaeaea; 
+padding: 15px; 
+margin-top: 15px; 
+border-radius: 8px; 
 }
 
 .post-header { 
-  display: flex; 
-  align-items: center; 
-  gap: 10px; 
-  margin-bottom: 10px; 
+display: flex; 
+align-items: center; 
+gap: 10px; 
+margin-bottom: 10px; 
 }
 
 .post-avatar { 
-  width: 30px; 
-  height: 30px; 
-  border-radius: 50%; 
+width: 30px; 
+height: 30px; 
+border-radius: 50%; 
 }
 
 .like-btn { 
-  cursor: pointer; 
-  border: none; 
-  background: #f9f9fa; 
-  padding: 5px 12px; 
-  border-radius: 20px; 
-  margin-top: 10px; 
-  color: black;
+cursor: pointer; 
+border: none; 
+background: #f9f9fa; 
+padding: 5px 12px; 
+border-radius: 20px; 
+margin-top: 10px; 
 }
 
 .time { 
-  font-size: 11px; 
-  color: #999; 
-  margin-left: auto; 
+font-size: 11px; 
+color: #999; 
+margin-left: auto; 
 }
 
 .post-image {
-  width: 100%;
-  max-height: 350px;
-  object-fit: cover;
-  margin-top: 10px;
-  border-radius: 10px;
-  border: 1px solid #eaeaea;
+width:100%;
+max-height:350px;
+object-fit:cover;
+margin-top:10px;
+border-radius:10px;
 }
-</style>
 
+.chat-box{
+height:250px;
+overflow-y:auto;
+border:1px solid #eee;
+padding:10px;
+border-radius:8px;
+margin-bottom:10px;
+}
+
+.msg{
+padding:6px 10px;
+border-radius:10px;
+margin:4px 0;
+display:inline-block;
+background:#f1f1f1;
+}
+
+.me{
+background:#007bff;
+color:white;
+float:right;
+}
+
+</style>
 </head>
 
 <body>
 
-<div id="authSection" class="container" style="max-width: 500px; text-align: center;">
-  <button id="loginBtn" class="logo-btn">Вход через Google</button>
+<div id="authSection" class="container" style="text-align:center;">
 
-  <div id="userInfo" style="display: none;" class="auth-bar">
-    <img id="userPhoto" class="user-avatar" src="" alt="Avatar">
-    <span id="userName" style="font-weight: bold;"></span>
-    <button id="logoutBtn" class="logo-btn">Выйти</button>
-  </div>
+<button id="loginBtn" class="logo-btn">Вход через Google</button>
+
+<div id="userInfo" style="display:none;" class="auth-bar">
+<img id="userPhoto" class="user-avatar">
+<span id="userName"></span>
+<button id="logoutBtn" class="logo-btn">Выйти</button>
 </div>
 
-<div id="messageForm" class="container" style="display: none;">
-  <h3>Создать запись</h3>
-
-  <input type="text" id="name" placeholder="Имя проекта" readonly>
-  <input type="text" id="email" placeholder="Ваш Email" readonly>
-  <input type="text" id="content" placeholder="Что у вас нового?">
-  <input type="file" id="imageInput" accept="image/*">
-
-  <button id="mainBtn">Опубликовать в облако</button>
 </div>
 
-<div id="feed" style="width: 100%; max-width: 500px;"></div>
+<div id="messageForm" class="container" style="display:none;">
+
+<h3>Создать запись</h3>
+
+<input id="name" readonly>
+<input id="email" readonly>
+
+<input id="content" placeholder="Что у вас нового?">
+<input type="file" id="imageInput">
+
+<button id="mainBtn">Опубликовать</button>
+
+</div>
+
+<div id="chatContainer" class="container" style="display:none;">
+
+<h3>Личные сообщения</h3>
+
+<div id="userList"></div>
+
+<hr>
+
+<b id="chatTitle">Выберите пользователя</b>
+
+<div id="chatBox" class="chat-box"></div>
+
+<div style="display:flex;gap:10px;">
+<input id="chatInput" placeholder="Сообщение">
+<button id="sendMsgBtn" style="width:80px;">➤</button>
+</div>
+
+</div>
+
+<div id="feed" style="width:100%;max-width:500px;"></div>
 
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-import { 
-  getFirestore, collection, addDoc, query, orderBy,
-  onSnapshot, serverTimestamp, updateDoc, doc, increment
+
+import {
+getFirestore, collection, addDoc, query,
+orderBy, onSnapshot, serverTimestamp,
+updateDoc, doc, increment, getDocs
 } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
 import {
-  getAuth, GoogleAuthProvider, signInWithPopup,
-  signOut, onAuthStateChanged
+getAuth, GoogleAuthProvider,
+signInWithPopup, signOut,
+onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
 
 import {
-  getStorage, ref, uploadBytes, getDownloadURL
+getStorage, ref, uploadBytes,
+getDownloadURL
 } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCk6uLrX34xpTxyHC0_cCA9_dM4DeFztLI",
-  authDomain: "amoree-91384.firebaseapp.com",
-  databaseURL: "https://amoree-91384-default-rtdb.firebaseio.com",
-  projectId: "amoree-91384",
-  storageBucket: "amoree-91384.firebasestorage.app",
-  messagingSenderId: "102582885984",
-  appId: "1:102582885984:web:a28c31ec5f83fa71b2ad05",
-  measurementId: "G-4MVG1QSLKR"
+apiKey:"AIzaSy...",
+authDomain:"amoree-91384.firebaseapp.com",
+projectId:"amoree-91384",
+storageBucket:"amoree-91384.firebasestorage.app",
+messagingSenderId:"102582885984",
+appId:"1:102582885984:web:a28c31ec5f83fa71b2ad05"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-const storage = getStorage(app);
-const provider = new GoogleAuthProvider();
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
+const auth=getAuth(app);
+const storage=getStorage(app);
+const provider=new GoogleAuthProvider();
 
-const loginBtn = document.getElementById("loginBtn");
-const logoutBtn = document.getElementById("logoutBtn");
-const userInfo = document.getElementById("userInfo");
-const messageForm = document.getElementById("messageForm");
+loginBtn.onclick=()=>signInWithPopup(auth,provider);
+logoutBtn.onclick=()=>signOut(auth);
 
-loginBtn.onclick = () => signInWithPopup(auth, provider);
-logoutBtn.onclick = () => signOut(auth);
+onAuthStateChanged(auth,user=>{
 
-onAuthStateChanged(auth, user => {
-  if (user) {
-    loginBtn.style.display = "none";
-    userInfo.style.display = "flex";
-    messageForm.style.display = "block";
+if(user){
 
-    document.getElementById("userName").innerText = user.displayName;
-    document.getElementById("userPhoto").src = user.photoURL;
-    document.getElementById("name").value = user.displayName;
-    document.getElementById("email").value = user.email;
-  } else {
-    loginBtn.style.display = "block";
-    userInfo.style.display = "none";
-    messageForm.style.display = "none";
-  }
-});
+loginBtn.style.display="none";
+userInfo.style.display="flex";
+messageForm.style.display="block";
+chatContainer.style.display="block";
 
-// функция лайка
-window.pressLike = async (id) => {
-  await updateDoc(doc(db, "requests", id), {
-    likes: increment(1)
-  });
-};
+userName.innerText=user.displayName;
+userPhoto.src=user.photoURL;
 
-// функция загрузки картинки
-async function uploadImage(file) {
-  if (!file) return "";
+name.value=user.displayName;
+email.value=user.email;
 
-  const user = auth.currentUser;
-  if (!user) throw new Error("Пользователь не авторизован");
+loadUsers();
 
-  const fileName = `images/${user.uid}/${Date.now()}_${file.name}`;
-  const storageRef = ref(storage, fileName);
+}else{
 
-  await uploadBytes(storageRef, file);
-  const imageUrl = await getDownloadURL(storageRef);
+loginBtn.style.display="block";
+userInfo.style.display="none";
+messageForm.style.display="none";
+chatContainer.style.display="none";
 
-  return imageUrl;
 }
 
-document.getElementById("mainBtn").onclick = async () => {
-  const content = document.getElementById("content").value.trim();
-  const imageFile = document.getElementById("imageInput").files[0];
-
-  if (!content && !imageFile) {
-    return alert("Введите текст или выберите картинку");
-  }
-
-  try {
-    let imageUrl = "";
-
-    if (imageFile) {
-      imageUrl = await uploadImage(imageFile);
-    }
-
-    await addDoc(collection(db, "requests"), {
-      name: auth.currentUser.displayName,
-      email: auth.currentUser.email,
-      photo: auth.currentUser.photoURL,
-      text: content,
-      imageUrl: imageUrl,
-      likes: 0,
-      timestamp: serverTimestamp()
-    });
-
-    document.getElementById("content").value = "";
-    document.getElementById("imageInput").value = "";
-
-  } catch (e) {
-    console.error(e);
-    alert("Ошибка загрузки или доступа! Проверьте Rules в Firebase.");
-  }
-};
-
-const q = query(collection(db, "requests"), orderBy("timestamp", "desc"));
-
-onSnapshot(q, (snapshot) => {
-  const feed = document.getElementById("feed");
-  feed.innerHTML = "";
-
-  snapshot.forEach((docItem) => {
-    const data = docItem.data();
-
-    feed.innerHTML += `
-      <div class="post">
-        <div class="post-header">
-          <img src="${data.photo || 'https://via.placeholder.com/30'}" class="post-avatar">
-          <b>${data.name}</b>
-          <span class="time">${data.timestamp?.toDate().toLocaleTimeString() || '--:--'}</span>
-        </div>
-
-        <p>${data.text || ""}</p>
-
-        ${data.imageUrl ? `<img src="${data.imageUrl}" class="post-image" alt="Картинка поста">` : ""}
-
-        <button class="like-btn" onclick="pressLike('${docItem.id}')">👍 ${data.likes || 0}</button>
-      </div>
-    `;
-  });
 });
 
-window.db = db;
+async function uploadImage(file){
+
+if(!file) return "";
+
+const fileName=`images/${auth.currentUser.uid}_${Date.now()}`;
+
+const storageRef=ref(storage,fileName);
+
+await uploadBytes(storageRef,file);
+
+return await getDownloadURL(storageRef);
+
+}
+
+mainBtn.onclick=async()=>{
+
+const text=content.value.trim();
+const image=imageInput.files[0];
+
+if(!text && !image) return;
+
+let imageUrl="";
+
+if(image) imageUrl=await uploadImage(image);
+
+await addDoc(collection(db,"requests"),{
+
+name:auth.currentUser.displayName,
+email:auth.currentUser.email,
+photo:auth.currentUser.photoURL,
+text:text,
+imageUrl:imageUrl,
+likes:0,
+timestamp:serverTimestamp()
+
+});
+
+content.value="";
+imageInput.value="";
+
+};
+
+window.pressLike=async(id)=>{
+
+await updateDoc(doc(db,"requests",id),{
+likes:increment(1)
+});
+
+};
+
+const q=query(collection(db,"requests"),orderBy("timestamp","desc"));
+
+onSnapshot(q,snap=>{
+
+feed.innerHTML="";
+
+snap.forEach(d=>{
+
+const data=d.data();
+
+feed.innerHTML+=`
+
+<div class="post">
+
+<div class="post-header">
+<img src="${data.photo}" class="post-avatar">
+<b>${data.name}</b>
+<span class="time">${data.timestamp?.toDate().toLocaleTimeString()||""}</span>
+</div>
+
+<p>${data.text||""}</p>
+
+${data.imageUrl?`<img src="${data.imageUrl}" class="post-image">`:""}
+
+<button class="like-btn" onclick="pressLike('${d.id}')">
+👍 ${data.likes||0}
+</button>
+
+</div>
+
+`;
+
+});
+
+});
+
+async function loadUsers(){
+
+const snap=await getDocs(collection(db,"requests"));
+
+const users=new Map();
+
+snap.forEach(d=>{
+
+const u=d.data();
+
+users.set(u.email,{
+name:u.name,
+email:u.email
+});
+
+});
+
+userList.innerHTML="";
+
+users.forEach(u=>{
+
+if(u.email===auth.currentUser.email) return;
+
+userList.innerHTML+=`
+<div onclick="openChat('${u.email}','${u.name}')" 
+style="padding:6px;border-bottom:1px solid #eee;cursor:pointer;">
+${u.name}
+</div>`;
+
+});
+
+}
+
+let currentChat=null;
+
+window.openChat=(email,name)=>{
+
+currentChat=[auth.currentUser.email,email].sort().join("_");
+
+chatTitle.innerText="Чат с "+name;
+
+const q=query(
+collection(db,"chats",currentChat,"messages"),
+orderBy("timestamp")
+);
+
+onSnapshot(q,snap=>{
+
+chatBox.innerHTML="";
+
+snap.forEach(d=>{
+
+const m=d.data();
+
+const me=m.sender===auth.currentUser.email;
+
+chatBox.innerHTML+=`
+<div style="clear:both">
+<span class="msg ${me?"me":""}">
+${m.text}
+</span>
+</div>`;
+
+});
+
+chatBox.scrollTop=chatBox.scrollHeight;
+
+});
+
+};
+
+sendMsgBtn.onclick=async()=>{
+
+const text=chatInput.value.trim();
+
+if(!text||!currentChat) return;
+
+await addDoc(
+collection(db,"chats",currentChat,"messages"),
+{
+sender:auth.currentUser.email,
+text:text,
+timestamp:serverTimestamp()
+}
+);
+
+chatInput.value="";
+
+};
+
 </script>
 </body>
 </html>
